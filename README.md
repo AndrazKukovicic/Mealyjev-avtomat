@@ -1,5 +1,5 @@
 # Mealyjev-avtomat
-Projektna naloga pri Programiranju 1
+### Projektna naloga pri Programiranju 1
 ---
 Mealyjev avtomat, je avtomat s končnim številom stanj in izhodom odvisnim od trenutnega prehoda.
 Formalno je Mealyjev avtomat predstavljen s šesterico $(S, s_0, \Sigma, \Lambda, T, G)$ pri čemer je:
