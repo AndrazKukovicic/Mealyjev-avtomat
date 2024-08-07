@@ -3,9 +3,6 @@
 (** @canonical Definicije.Avtomat *)
 module Avtomat = Definicije__Avtomat
 
-(** @canonical Definicije.Izhod *)
-module Izhod = Definicije__Izhod
-
 (** @canonical Definicije.Stanje *)
 module Stanje = Definicije__Stanje
 
