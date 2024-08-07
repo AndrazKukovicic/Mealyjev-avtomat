@@ -19,14 +19,26 @@ type msg =
   | ZamenjajVmesnik of stanje_vmesnika
   | VrniVPrvotnoStanje
 
-let preberi_niz avtomat q niz =
-  let aux acc znak =
-    match acc with
-    | None -> None
-    | Some q -> Avtomat.prehodna_funkcija avtomat q znak
-  in
-  niz |> String.to_seq |> Seq.fold_left aux (Some q)
+let preberi_niz model niz =
+  let rec aux zagnani_avtomat i =
+    if i < String.length niz then
+      let nov_zagnani_avtomat = ZagnaniAvtomat.korak_naprej  zagnani_avtomat in
+      aux nov_zagnani_avtomat (i + 1)
+    else zagnani_avtomat
+  in 
+  let zagnani_avtomat = aux model.stanje_avtomata 0 in 
+  { model with stanje_avtomata = zagnani_avtomat }
+    
 
+  let preberi_niz model niz =
+    let rec aux zagnani_avtomat i =
+      if i < String.length niz then
+        let nov_zagnani_avtomat = ZagnaniAvtomat.premik naprej zagnani_avtomat in
+        aux nov_zagnani_avtomat (i + 1)
+      else zagnani_avtomat
+    in
+    let zagnani_avtomat = aux model.stanje_avtomata 0 in
+    { model with stanje_avtomata = zagnani_avtomat }
 let update model = function
   | PreberiNiz str -> (
       match preberi_niz model.avtomat model.stanje_avtomata str with
