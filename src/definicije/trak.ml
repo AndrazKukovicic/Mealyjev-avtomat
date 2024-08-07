@@ -1,6 +1,5 @@
 type t = { niz : string; indeks_trenutnega_znaka : int }
 
-
 let trenutni_znak trak = String.get trak.niz trak.indeks_trenutnega_znaka
 let je_na_koncu trak = String.length trak.niz = trak.indeks_trenutnega_znaka
 
