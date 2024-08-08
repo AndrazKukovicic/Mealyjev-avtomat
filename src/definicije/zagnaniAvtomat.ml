@@ -20,3 +20,8 @@ let korak_naprej { avtomat; trak; stanje } =
 
 let je_v_sprejemnem_stanju { avtomat; stanje; _ } =
   Avtomat.je_sprejemno_stanje avtomat stanje
+
+let inicializiraj_avtomat zacetno_stanje sprejemna_stanja prehodi vhodni_niz =
+  let avtomat = Avtomat.ustvari_avtomat zacetno_stanje sprejemna_stanja prehodi in
+  let trak = Trak.iz_niza vhodni_niz in
+  pozeni avtomat trak

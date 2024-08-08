@@ -55,3 +55,9 @@ let preberi_niz avtomat q niz =
         | Some (q', izhod) -> (Some q', acc_izhod ^ izhod)
   in
   niz |> String.to_seq |> Seq.fold_left aux (Some q, "")
+
+let ustvari_avtomat zacetno_stanje sprejemna_stanja prehodi =
+  let pr_avtomat = prazen_avtomat zacetno_stanje in
+  let avtomat = List.fold_left (fun a s -> dodaj_nesprejemno_stanje s a) pr_avtomat sprejemna_stanja in
+  List.fold_left (fun a (s1, znak, s2, izhod) -> dodaj_prehod s1 znak s2 izhod a) avtomat prehodi
+

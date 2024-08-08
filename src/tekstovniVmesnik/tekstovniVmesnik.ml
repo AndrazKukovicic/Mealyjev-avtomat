@@ -10,7 +10,7 @@ type stanje_vmesnika =
 
 type model = {
   avtomat : t;
-  stanje_avtomata : Stanje.t;
+  stanje_avtomata : ZagnaniAvtomat.t;
   stanje_vmesnika : stanje_vmesnika;
 }
 
@@ -22,40 +22,29 @@ type msg =
 let preberi_niz model niz =
   let rec aux zagnani_avtomat i =
     if i < String.length niz then
-      let nov_zagnani_avtomat = ZagnaniAvtomat.korak_naprej  zagnani_avtomat in
-      aux nov_zagnani_avtomat (i + 1)
+      match ZagnaniAvtomat.korak_naprej  zagnani_avtomat with
+      | None -> zagnani_avtomat
+      | Some nov_zagnani_avtomat -> aux nov_zagnani_avtomat (i + 1)
     else zagnani_avtomat
   in 
   let zagnani_avtomat = aux model.stanje_avtomata 0 in 
   { model with stanje_avtomata = zagnani_avtomat }
     
-
-  let preberi_niz model niz =
-    let rec aux zagnani_avtomat i =
-      if i < String.length niz then
-        let nov_zagnani_avtomat = ZagnaniAvtomat.premik naprej zagnani_avtomat in
-        aux nov_zagnani_avtomat (i + 1)
-      else zagnani_avtomat
-    in
-    let zagnani_avtomat = aux model.stanje_avtomata 0 in
-    { model with stanje_avtomata = zagnani_avtomat }
 let update model = function
-  | PreberiNiz str -> (
-      match preberi_niz model.avtomat model.stanje_avtomata str with
-      | None -> { model with stanje_vmesnika = OpozoriloONapacnemNizu }
-      | Some stanje_avtomata ->
+  | PreberiNiz str -> 
+      let nov_model = preberi_niz model str in
+      if ZagnaniAvtomat.je_v_sprejemnem_stanju nov_model.stanje_avtomata then
+        { nov_model with stanje_vmesnika = RezultatPrebranegaNiza }
+      else
+        { nov_model with stanje_vmesnika = OpozoriloONapacnemNizu }
+      | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
+      | VrniVPrvotnoStanje -> 
           {
             model with
-            stanje_avtomata;
-            stanje_vmesnika = RezultatPrebranegaNiza;
-          })
-  | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
-  | VrniVPrvotnoStanje ->
-      {
-        model with
-        stanje_avtomata = zacetno_stanje model.avtomat;
-        stanje_vmesnika = SeznamMoznosti;
-      }
+            stanje_avtomata = ZagnaniAvtomat.pozeni model.avtomat (Trak.prazen);
+            stanje_vmesnika = SeznamMoznosti;
+          }
+  
 
 let rec izpisi_moznosti () =
   print_endline "1) izpiši avtomat";
@@ -89,7 +78,7 @@ let beri_niz _model =
   PreberiNiz str
 
 let izpisi_rezultat model =
-  if je_sprejemno_stanje model.avtomat model.stanje_avtomata then
+  if ZagnaniAvtomat.je_v_sprejemnem_stanju model.stanje_avtomata then
     print_endline "Niz je bil sprejet"
   else print_endline "Niz ni bil sprejet"
 
@@ -110,7 +99,7 @@ let view model =
 let init avtomat =
   {
     avtomat;
-    stanje_avtomata = zacetno_stanje avtomat;
+    stanje_avtomata = ZagnaniAvtomat.pozeni avtomat (Trak.prazen);
     stanje_vmesnika = SeznamMoznosti;
   }
 
@@ -119,4 +108,30 @@ let rec loop model =
   let model' = update model msg in
   loop model'
 
-let _ = loop (init enke_1mod3)
+let main () = 
+  print_string "Vnesi začetni stanje: ";
+  let zacetno_stanje = read_line () |> Stanje.iz_niza in 
+  print_string "Vnesi sprejemna stanja (ločena s presledki): ";
+  let sprejemna_stanja =
+    read_line () |> String.split_on_char ' ' |> List.map Stanje.iz_niza in
+    print_endline "Vnesi prehode (v obliki: stanje1 znak stanje2 izhod). Pritisni Enter, ko končaš.";
+    let rec preberi_prehode acc =
+      print_string "> ";
+      match read_line () with 
+      | "" -> List.rev acc
+      | vrstica -> 
+          let deli = String.split_on_char ' ' vrstica in 
+          match deli with
+          | [s1; znak; s2; izhod] -> 
+            let prehod = (Stanje.iz_niza s1, String.get znak 0, Stanje.iz_niza s2, izhod) in
+            preberi_prehode (prehod :: acc)
+          | _ -> print_endline "Napačen format zapisa. Poskusi znova.";
+                 preberi_prehode acc
+          in
+          let prehodi = preberi_prehode [] in
+  let avtomat = ustvari_avtomat zacetno_stanje sprejemna_stanja prehodi in
+  let model = init avtomat in
+  loop model
+
+
+  let () = main ()

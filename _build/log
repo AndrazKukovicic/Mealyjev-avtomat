@@ -1,4 +1,4 @@
-# dune build
+# dune exec ./tekstovniVmesnik.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /home/andraz/.cache/dune/db
@@ -13,21 +13,4 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /usr/bin/ocamlc.opt -config > /tmp/dune_4692bc_output
-$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/definicije/zagnaniAvtomat.ml) > _build/default/src/definicije/.definicije.objs/definicije__ZagnaniAvtomat.impl.d
-$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/definicije/.definicije.objs/byte -no-alias-deps -opaque -open Definicije -o src/definicije/.definicije.objs/byte/definicije__ZagnaniAvtomat.cmo -c -impl src/definicije/zagnaniAvtomat.ml)
-$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/definicije/definicije.cma src/definicije/.definicije.objs/byte/definicije.cmo src/definicije/.definicije.objs/byte/definicije__Stanje.cmo src/definicije/.definicije.objs/byte/definicije__Avtomat.cmo src/definicije/.definicije.objs/byte/definicije__Trak.cmo src/definicije/.definicije.objs/byte/definicije__ZagnaniAvtomat.cmo)
-$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/tekstovniVmesnik/.tekstovniVmesnik.eobjs/byte -I src/definicije/.definicije.objs/byte -no-alias-deps -opaque -o src/tekstovniVmesnik/.tekstovniVmesnik.eobjs/byte/dune__exe__TekstovniVmesnik.cmi -c -intf src/tekstovniVmesnik/tekstovniVmesnik.mli)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/definicije/.definicije.objs/byte -I src/definicije/.definicije.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Definicije -o src/definicije/.definicije.objs/native/definicije__ZagnaniAvtomat.cmx -c -impl src/definicije/zagnaniAvtomat.ml)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/tekstovniVmesnik/.tekstovniVmesnik.eobjs/byte -I src/tekstovniVmesnik/.tekstovniVmesnik.eobjs/native -I src/definicije/.definicije.objs/byte -I src/definicije/.definicije.objs/native -intf-suffix .ml -no-alias-deps -opaque -o src/tekstovniVmesnik/.tekstovniVmesnik.eobjs/native/dune__exe__TekstovniVmesnik.cmx -c -impl src/tekstovniVmesnik/tekstovniVmesnik.ml)
-> File "src/tekstovniVmesnik/tekstovniVmesnik.ml", line 28, characters 40-43:
-> 28 |   niz |> String.to_seq |> Seq.fold_left aux (Some q)
->                                              ^^^
-> Error: This expression has type
->          stanje option -> char -> (stanje * string) option
->        but an expression was expected of type
->          stanje option -> char -> stanje option
->        Type stanje * string is not compatible with type stanje 
-[2]
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/definicije/definicije.cmxa src/definicije/.definicije.objs/native/definicije.cmx src/definicije/.definicije.objs/native/definicije__Stanje.cmx src/definicije/.definicije.objs/native/definicije__Avtomat.cmx src/definicije/.definicije.objs/native/definicije__Trak.cmx src/definicije/.definicije.objs/native/definicije__ZagnaniAvtomat.cmx)
-$ (cd _build/default && /usr/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -shared -linkall -I src/definicije -o src/definicije/definicije.cmxs src/definicije/definicije.cmxa)
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_0e61ea_output

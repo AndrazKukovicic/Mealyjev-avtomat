@@ -13,7 +13,7 @@ let iz_niza niz = { niz; indeks_trenutnega_znaka = 0; izhod = "" }
 let prazen = iz_niza ""
 let v_niz trak = trak.niz
 
-let dodaj_izhod izhodni_znak trak =
+let dodaj_izhod trak izhodni_znak =
   { trak with izhod = trak.izhod ^ izhodni_znak }
 
 let vrni_izhod trak =
