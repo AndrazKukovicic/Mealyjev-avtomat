@@ -109,7 +109,7 @@ let rec loop model =
   loop model'
 
 let main () = 
-  print_string "Vnesi začetni stanje: ";
+  print_string "Vnesi začetno stanje: ";
   let zacetno_stanje = read_line () |> Stanje.iz_niza in 
   print_string "Vnesi sprejemna stanja (ločena s presledki): ";
   let sprejemna_stanja =
