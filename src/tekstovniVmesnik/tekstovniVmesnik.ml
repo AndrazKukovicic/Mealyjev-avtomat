@@ -4,7 +4,6 @@ open Trak
 
 type stanje_vmesnika =
   | SeznamMoznosti
-  | IzpisAvtomata
   | BranjeNiza
   | RezultatPrebranegaNiza
   | OpozoriloONapacnemNizu
@@ -52,7 +51,6 @@ let update model = function
       { model with stanje_vmesnika = SestaviNovAvtomat }
 
 let rec izpisi_moznosti () =
-  
   print_endline "1) Vnesi in preberi niz.";
   print_endline "2) Sestavi nov Mealyjev avtomat.";
   print_string "> ";
@@ -71,9 +69,6 @@ let view model =
   match model.stanje_vmesnika with
   | SeznamMoznosti ->
       izpisi_moznosti ();
-      ZamenjajVmesnik SeznamMoznosti
-  | IzpisAvtomata ->
-      izpisi_avtomat model.avtomat;
       ZamenjajVmesnik SeznamMoznosti
   | BranjeNiza ->
       print_string "Vnesi niz: ";
