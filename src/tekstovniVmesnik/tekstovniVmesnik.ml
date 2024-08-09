@@ -1,3 +1,4 @@
+open Definicije
 open Avtomat
 open ZagnaniAvtomat
 open Trak
@@ -10,7 +11,7 @@ type stanje_vmesnika =
   | SestaviNovAvtomat
 
 type model = {
-  avtomat: avtomat;
+  avtomat: Avtomat.t;
   stanje_avtomata: ZagnaniAvtomat.t;
   stanje_vmesnika: stanje_vmesnika;
   prebrani_izhod: string
