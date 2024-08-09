@@ -5,7 +5,7 @@ let je_na_koncu trak = String.length trak.niz = trak.indeks_trenutnega_znaka
 
 
 let premakni_naprej trak =
-  if trak.indeks_trenutnega_znaka < String.length trak.niz -1 then
+  if trak.indeks_trenutnega_znaka < String.length trak.niz - 1 then
   { trak with indeks_trenutnega_znaka = succ trak.indeks_trenutnega_znaka }
   else trak
 
