@@ -40,8 +40,8 @@ let preberi_niz model niz =
   in
   let zagnan_avtomat = aux model.stanje_avtomata 0 in
   let prebrani_izh = zagnan_avtomat.trak.izhod in
-  { model with stanje_avtomata = zagnan_avtomat; prebrani_izhod = prebrani_izh }
-     
+  { model with stanje_avtomata = zagnan_avtomat;  prebrani_izhod = prebrani_izh }
+  
 
 
 

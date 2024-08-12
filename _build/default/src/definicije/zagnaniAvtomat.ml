@@ -15,9 +15,9 @@ let korak_naprej { avtomat; trak; stanje } =
       Avtomat.prehodna_funkcija avtomat stanje (Trak.trenutni_znak trak)
     in
     match stanje' with
-    | None -> failwith "napaka"
-    | Some (stanje', izhod) ->
-        { avtomat; trak = Trak.premakni_naprej (Trak.dodaj_izhod trak izhod) ; stanje = stanje' }
+    
+    | stanje', izhod ->
+        { avtomat; trak = (Trak.dodaj_izhod (Trak.premakni_naprej trak) izhod) ; stanje = stanje' }
 (*
 let je_v_sprejemnem_stanju { avtomat; stanje; _ } =
   Avtomat.je_sprejemno_stanje avtomat stanje
