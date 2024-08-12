@@ -8,7 +8,7 @@ type stanje_vmesnika =
   | BranjeNiza
   | RezultatPrebranegaNiza
 
-  | SestaviNovAvtomat
+  
 
 type model = {
   
@@ -20,7 +20,6 @@ type model = {
 type msg =
   | PreberiNiz of string
   | ZamenjajVmesnik of stanje_vmesnika
-  (*| VrniVPrvotnoStanje  *)
   | SestaviNovMealyjevAvtomat
 
 let init avtomat =
@@ -31,26 +30,7 @@ let init avtomat =
   }
 
 
-(*
-let ustvari_avtomat () =
-  print_endline "Vnesite začetno stanje: ";
-  let ustvarjen_avtomat = prazen_avtomat (Stanje.iz_niza(read_line ())) in
-  print_string "Vnesi ostala stanja (ločena s presledki): ";
-  let stanja =
-    read_line () |> String.split_on_char ' ' |> List.map Stanje.iz_niza in
-  
-  
-  print_endline "Vnesite prehode v formatu stanje 1, vhod, stanje 2, izhod. Pritisnite Enter. ";
-      let rec preberi_prehode () = 
-        print_string "> ";
-        match read_line () with
-        | "" -> []
-        | prehod -> 
-          let s1, znak, s2, izhod = String.split_on_char ',' prehod in 
-          let prehod = dodaj_prehod s1 znak s2 izhod in
-          prehod :: preberi_prehode ()
 
-*)
 let preberi_niz model niz =
   let rec aux zagnani_avtomat i =
     if i < String.length niz then
@@ -63,21 +43,6 @@ let preberi_niz model niz =
   { model with stanje_avtomata = zagnan_avtomat; prebrani_izhod }
    
   
-
-let update model = function
-  | PreberiNiz str ->
-      let nov_model = preberi_niz model str in
-      { nov_model with stanje_vmesnika = RezultatPrebranegaNiza }
-  | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
-  (*| VrniVPrvotnoStanje ->
-      {
-        model with
-        stanje_avtomata = ZagnaniAvtomat.pozeni model.avtomat (Trak.prazen);
-        stanje_vmesnika = SeznamMoznosti;
-        prebrani_izhod = ""
-      }
-        *)
-  | SestaviNovMealyjevAvtomat -> {model with stanje_vmesnika = SestaviNovAvtomat}
 
 
 
@@ -96,28 +61,9 @@ let rec izpisi_moznosti () =
 let izpisi_rezultat model =
   print_endline ("Izhod: " ^ model.prebrani_izhod)
 
-let view model =
-  match model.stanje_vmesnika with
-  | SeznamMoznosti ->
-    izpisi_moznosti ()
-  | BranjeNiza ->
-      print_string "Vnesi niz: ";
-      let niz = read_line () in
-      PreberiNiz niz
-  | RezultatPrebranegaNiza ->
-      izpisi_rezultat model;
-      ZamenjajVmesnik SeznamMoznosti
   
-  | SestaviNovAvtomat ->
-      ZamenjajVmesnik SeznamMoznosti
 
-
-let rec loop model =
-  let msg = view model in
-  let model' = update model msg in
-  loop model'
-
-let main () =
+let main_init () =
   print_string "Vnesi začetno stanje: ";
   let zacetno_stanje = read_line () |> Stanje.iz_niza in
 
@@ -144,8 +90,38 @@ let main () =
   in
   let prehodi = preberi_prehode [] in
 
-  let avtomat = Avtomat.ustvari_avtomat zacetno_stanje stanja prehodi in
+  Avtomat.ustvari_avtomat zacetno_stanje stanja prehodi
+ let view model =
+  match model.stanje_vmesnika with
+  | SeznamMoznosti ->
+    izpisi_moznosti ()
+  | BranjeNiza ->
+      print_string "Vnesi niz: ";
+      let niz = read_line () in
+      PreberiNiz niz
+  | RezultatPrebranegaNiza ->
+      izpisi_rezultat model;
+      ZamenjajVmesnik SeznamMoznosti
+  
+  
+let update model = function
+  | PreberiNiz str ->
+      let nov_model = preberi_niz model str in
+      { nov_model with stanje_vmesnika = RezultatPrebranegaNiza }
+  | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
+  | SestaviNovMealyjevAvtomat -> let nov_avtomat = main_init () in
+  init nov_avtomat
+
+let rec loop model =
+  let msg = view model in
+  let model' = update model msg in
+  loop model'
+
+
+
+let main () =
+  let avtomat = main_init () in
   let model = init avtomat in
-  loop model
+  loop model 
 
 let () = main ()
