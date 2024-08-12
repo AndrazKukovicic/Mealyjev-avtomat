@@ -30,56 +30,18 @@ let init avtomat =
   }
 
 
-(*
-let ustvari_avtomat () =
-  print_endline "Vnesite začetno stanje: ";
-  let ustvarjen_avtomat = prazen_avtomat (Stanje.iz_niza(read_line ())) in
-  print_string "Vnesi ostala stanja (ločena s presledki): ";
-  let stanja =
-    read_line () |> String.split_on_char ' ' |> List.map Stanje.iz_niza in
-  
-  
-  print_endline "Vnesite prehode v formatu stanje 1, vhod, stanje 2, izhod. Pritisnite Enter. ";
-      let rec preberi_prehode () = 
-        print_string "> ";
-        match read_line () with
-        | "" -> []
-        | prehod -> 
-          let s1, znak, s2, izhod = String.split_on_char ',' prehod in 
-          let prehod = dodaj_prehod s1 znak s2 izhod in
-          prehod :: preberi_prehode ()
 
-*)
 let preberi_niz model niz =
   let rec aux zagnani_avtomat i =
-    if i < String.length niz then
+    if i < (String.length niz) then
       let zagnani_avtomat = korak_naprej zagnani_avtomat in
-      aux (Option.get zagnani_avtomat) (i + 1)
+      aux zagnani_avtomat (i + 1)
     else zagnani_avtomat
   in
   let zagnan_avtomat = aux model.stanje_avtomata 0 in
-  let prebrani_izhod = zagnan_avtomat.trak.izhod in
-  { model with stanje_avtomata = zagnan_avtomat; prebrani_izhod }
-   
-  
-
-(*
-let update model = function
-  | PreberiNiz str ->
-      let nov_model = preberi_niz model str in
-      { nov_model with stanje_vmesnika = RezultatPrebranegaNiza }
-  | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
-  (*| VrniVPrvotnoStanje ->
-      {
-        model with
-        stanje_avtomata = ZagnaniAvtomat.pozeni model.avtomat (Trak.prazen);
-        stanje_vmesnika = SeznamMoznosti;
-        prebrani_izhod = ""
-      }
-        *)
-  | SestaviNovMealyjevAvtomat -> {model with stanje_vmesnika = SestaviNovAvtomat}
-*)
-  
+  let prebrani_izh = zagnan_avtomat.trak.izhod in
+  { model with stanje_avtomata = zagnan_avtomat; prebrani_izhod = prebrani_izh }
+     
 
 
 

@@ -33,16 +33,15 @@ let init avtomat =
 
 let preberi_niz model niz =
   let rec aux zagnani_avtomat i =
-    if i < String.length niz then
+    if i < (String.length niz) then
       let zagnani_avtomat = korak_naprej zagnani_avtomat in
-      aux (Option.get zagnani_avtomat) (i + 1)
+      aux zagnani_avtomat (i + 1)
     else zagnani_avtomat
   in
   let zagnan_avtomat = aux model.stanje_avtomata 0 in
-  let prebrani_izhod = zagnan_avtomat.trak.izhod in
-  { model with stanje_avtomata = zagnan_avtomat; prebrani_izhod }
-   
-  
+  let prebrani_izh = zagnan_avtomat.trak.izhod in
+  { model with stanje_avtomata = zagnan_avtomat; prebrani_izhod = prebrani_izh }
+     
 
 
 

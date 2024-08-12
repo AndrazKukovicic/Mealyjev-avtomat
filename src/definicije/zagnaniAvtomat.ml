@@ -8,15 +8,16 @@ let trak { trak; _ } = trak
 let stanje { stanje; _ } = stanje
 
 let korak_naprej { avtomat; trak; stanje } =
-  if Trak.je_na_koncu trak then None
-  else
+
+  if Trak.je_na_koncu trak then { avtomat; trak; stanje }
+  else 
     let stanje' =
       Avtomat.prehodna_funkcija avtomat stanje (Trak.trenutni_znak trak)
     in
     match stanje' with
-    | None -> None
+    | None -> failwith "napaka"
     | Some (stanje', izhod) ->
-        Some { avtomat; trak = Trak.premakni_naprej (Trak.dodaj_izhod trak izhod) ; stanje = stanje' }
+        { avtomat; trak = Trak.premakni_naprej (Trak.dodaj_izhod trak izhod) ; stanje = stanje' }
 (*
 let je_v_sprejemnem_stanju { avtomat; stanje; _ } =
   Avtomat.je_sprejemno_stanje avtomat stanje

@@ -28,8 +28,8 @@ let prehodna_funkcija avtomat stanje znak =
       (fun (stanje1, znak', _stanje2, _izhod) -> stanje1 = stanje && znak = znak')
       avtomat.prehodi
   with
-  | None -> None
-  | Some (_, _, stanje2, izhod) -> Some (stanje2, izhod)
+  | None -> failwith "Konec niza"
+  | Some (_, _, stanje2, izhod) -> (stanje2, izhod)
 
 let zacetno_stanje avtomat = avtomat.zacetno_stanje
 let seznam_stanj avtomat = avtomat.stanja
