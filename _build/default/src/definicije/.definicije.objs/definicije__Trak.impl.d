@@ -1,1 +1,1 @@
-src/definicije/trak.ml: String
+src/definicije/trak.ml: Char String

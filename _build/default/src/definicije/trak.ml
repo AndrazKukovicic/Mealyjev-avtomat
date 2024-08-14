@@ -1,11 +1,11 @@
 type t = { niz : string; indeks_trenutnega_znaka : int; izhod : string }
 
-let trenutni_znak trak = String.get trak.niz trak.indeks_trenutnega_znaka
-let je_na_koncu trak = String.length trak.niz = trak.indeks_trenutnega_znaka
+let trenutni_znak trak = Char.escaped(String.get trak.niz trak.indeks_trenutnega_znaka)
+let je_na_koncu trak = String.length trak.niz >= trak.indeks_trenutnega_znaka
 
 
 let premakni_naprej trak =
-  if trak.indeks_trenutnega_znaka < String.length trak.niz - 1 then
+  if trak.indeks_trenutnega_znaka < String.length trak.niz then
   { trak with indeks_trenutnega_znaka = succ trak.indeks_trenutnega_znaka }
   else trak
 

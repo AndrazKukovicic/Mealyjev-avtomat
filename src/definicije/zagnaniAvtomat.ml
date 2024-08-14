@@ -9,8 +9,8 @@ let stanje { stanje; _ } = stanje
 
 let korak_naprej { avtomat; trak; stanje } =
 
-  if Trak.je_na_koncu trak then { avtomat; trak; stanje }
-  else 
+  (* if Trak.je_na_koncu trak then { avtomat; trak; stanje }
+  else *)
     let stanje' =
       Avtomat.prehodna_funkcija avtomat stanje (Trak.trenutni_znak trak)
     in
@@ -18,12 +18,5 @@ let korak_naprej { avtomat; trak; stanje } =
     
     | stanje', izhod ->
         { avtomat; trak = (Trak.dodaj_izhod (Trak.premakni_naprej trak) izhod) ; stanje = stanje' }
-(*
-let je_v_sprejemnem_stanju { avtomat; stanje; _ } =
-  Avtomat.je_sprejemno_stanje avtomat stanje
-  *)
 
-let inicializiraj_avtomat zacetno_stanje stanja prehodi vhodni_niz =
-  let avtomat = Avtomat.ustvari_avtomat zacetno_stanje stanja prehodi in
-  let trak = Trak.iz_niza vhodni_niz in
-  pozeni avtomat trak
+

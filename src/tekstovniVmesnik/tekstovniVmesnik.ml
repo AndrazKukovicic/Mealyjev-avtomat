@@ -31,20 +31,18 @@ let init avtomat =
 
 
 
-let preberi_niz model niz =
+ let preberi_niz model niz =
   let rec aux zagnani_avtomat i =
     if i < (String.length niz) then
-      let zagnani_avtomat = korak_naprej zagnani_avtomat in
+      let zagnani_avtomat = ZagnaniAvtomat.korak_naprej zagnani_avtomat in
       aux zagnani_avtomat (i + 1)
     else zagnani_avtomat
   in
   let zagnan_avtomat = aux model.stanje_avtomata 0 in
   let prebrani_izh = zagnan_avtomat.trak.izhod in
   { model with stanje_avtomata = zagnan_avtomat;  prebrani_izhod = prebrani_izh }
+
   
-
-
-
 let rec izpisi_moznosti () =
   print_endline "1) Vnesi in preberi niz.";
   print_endline "2) Sestavi nov Mealyjev avtomat.";
@@ -79,8 +77,8 @@ let main_init () =
       let deli = String.split_on_char ' ' vrstica in
       match deli with
       | [s1; znak_str; s2; izhod] when String.length znak_str = 1 ->
-          let znak = znak_str.[0] in
-          let prehod = (Stanje.iz_niza s1, znak, Stanje.iz_niza s2, izhod) in
+    
+          let prehod = (Stanje.iz_niza s1,znak_str, Stanje.iz_niza s2, izhod) in
           preberi_prehode (prehod :: acc)
             
         | _ ->
