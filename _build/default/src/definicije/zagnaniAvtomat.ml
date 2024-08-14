@@ -9,14 +9,11 @@ let stanje { stanje; _ } = stanje
 
 let korak_naprej { avtomat; trak; stanje } =
 
-  (* if Trak.je_na_koncu trak then { avtomat; trak; stanje }
-  else *)
-    let stanje' =
-      Avtomat.prehodna_funkcija avtomat stanje (Trak.trenutni_znak trak)
+  if Trak.je_na_koncu trak then { avtomat; trak; stanje }
+  else 
+    let (stanje', izhod) =
+      Avtomat.prehodna_funkcija avtomat stanje (Trak.trenutni_znak trak)   
     in
-    match stanje' with
-    
-    | stanje', izhod ->
-        { avtomat; trak = (Trak.dodaj_izhod (Trak.premakni_naprej trak) izhod) ; stanje = stanje' }
+    { avtomat; trak = (Trak.dodaj_izhod (Trak.premakni_naprej trak) izhod) ; stanje = stanje' }
 
 

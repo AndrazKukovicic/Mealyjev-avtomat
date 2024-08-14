@@ -19,8 +19,9 @@ let dodaj_izhod trak izhodni_znak =
 let vrni_izhod trak =
   trak.izhod
 
-let prebrani trak = String.sub trak.niz 0 trak.indeks_trenutnega_znaka
+(* let prebrani trak = String.sub trak.niz 0 trak.indeks_trenutnega_znaka
 
 and neprebrani trak =
   String.sub trak.niz trak.indeks_trenutnega_znaka
     (String.length trak.niz - trak.indeks_trenutnega_znaka)
+*)

@@ -1,5 +1,4 @@
 open Definicije
-
 open ZagnaniAvtomat
 open Trak
 
@@ -8,10 +7,7 @@ type stanje_vmesnika =
   | BranjeNiza
   | RezultatPrebranegaNiza
 
-  
-
-type model = {
-  
+  type model = {
   stanje_avtomata: ZagnaniAvtomat.t;
   stanje_vmesnika: stanje_vmesnika;
   prebrani_izhod: string
@@ -29,20 +25,17 @@ let init avtomat =
     prebrani_izhod = ""
   }
 
-
-
  let preberi_niz model niz =
   let rec aux zagnani_avtomat i =
     if i < (String.length niz) then
-      let zagnani_avtomat = ZagnaniAvtomat.korak_naprej zagnani_avtomat in
-      aux zagnani_avtomat (i + 1)
+      let zagnani_avtomat' = ZagnaniAvtomat.korak_naprej zagnani_avtomat in
+      aux zagnani_avtomat' (i + 1)
     else zagnani_avtomat
   in
   let zagnan_avtomat = aux model.stanje_avtomata 0 in
   let prebrani_izh = zagnan_avtomat.trak.izhod in
   { model with stanje_avtomata = zagnan_avtomat;  prebrani_izhod = prebrani_izh }
 
-  
 let rec izpisi_moznosti () =
   print_endline "1) Vnesi in preberi niz.";
   print_endline "2) Sestavi nov Mealyjev avtomat.";
@@ -57,8 +50,6 @@ let rec izpisi_moznosti () =
 
 let izpisi_rezultat model =
   print_endline ("Izhod: " ^ model.prebrani_izhod)
-
-  
 
 let main_init () =
   print_string "Vnesi začetno stanje: ";
@@ -100,7 +91,6 @@ let main_init () =
       izpisi_rezultat model;
       ZamenjajVmesnik SeznamMoznosti
   
-  
 let update model = function
   | PreberiNiz str ->
       let nov_model = preberi_niz model str in
@@ -113,8 +103,6 @@ let rec loop model =
   let msg = view model in
   let model' = update model msg in
   loop model'
-
-
 
 let main () =
   let avtomat = main_init () in

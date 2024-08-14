@@ -1,10 +1,10 @@
 type stanje = Stanje.t
-type izhod = string
+
 
 type t = {
   stanja : stanje list;
   zacetno_stanje : stanje;
-  prehodi : (stanje * string * stanje * izhod) list;
+  prehodi : (stanje * string * stanje * string) list;
 }
 
 let prazen_avtomat zacetno_stanje =
@@ -17,24 +17,19 @@ let prazen_avtomat zacetno_stanje =
 let dodaj_stanje stanje avtomat =
   { avtomat with stanja = stanje :: avtomat.stanja }
 
-
-
 let dodaj_prehod stanje1 znak stanje2 izhod avtomat =
   { avtomat with prehodi = (stanje1, znak, stanje2, izhod) :: avtomat.prehodi }
 
-
+  (*treba je nekako popraviti tipe pri prehodna_funkcija, znak mora biti tipa string*)
 let prehodna_funkcija avtomat stanje znak =
   match
     List.find_opt
       (fun (stanje1, znak', _stanje2, _izhod) -> stanje1 = stanje && znak = znak')
       avtomat.prehodi
   with
-  | None -> 
-      
-      failwith "Konec niza"
-  | Some (_, _, stanje2, izhod) ->
-      
-      (stanje2, izhod)
+  | None -> failwith "Ni ustreznega prehoda"
+  | Some (_, _, stanje2, izhod) ->(stanje2, izhod)
+
 let zacetno_stanje avtomat = avtomat.zacetno_stanje
 let seznam_stanj avtomat = avtomat.stanja
 let seznam_prehodov avtomat = avtomat.prehodi
