@@ -61,7 +61,7 @@ let main_init () =
   let stanja =
     read_line () |> String.split_on_char ' ' |> List.map Stanje.iz_niza in
 
-  print_endline "Vnesi prehode (v obliki: stanje1 znak stanje2 izhod). Pritisni Enter, ko končaš.";
+  print_endline "Vnesi prehode v obliki: vhodno_stanje vhodni_znak izhodno_stanje izhodni_znak. Pritisni Enter po vsakem prehodu.";
   let rec preberi_prehode acc =
     print_string "> ";
     match read_line () with
