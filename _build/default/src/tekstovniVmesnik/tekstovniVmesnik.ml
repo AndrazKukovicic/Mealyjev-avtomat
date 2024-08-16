@@ -26,13 +26,15 @@ let init avtomat =
   }
 
  let preberi_niz model niz =
+  let avtomat = {model.stanje_avtomata with trak = Trak.iz_niza niz} in
+ 
   let rec aux zagnani_avtomat i =
     if i < (String.length niz) then
       let zagnani_avtomat' = ZagnaniAvtomat.korak_naprej zagnani_avtomat in
       aux zagnani_avtomat' (i + 1)
     else zagnani_avtomat
   in
-  let zagnan_avtomat = aux model.stanje_avtomata 0 in
+  let zagnan_avtomat = aux avtomat 0 in
   let prebrani_izh = zagnan_avtomat.trak.izhod in
   { model with stanje_avtomata = zagnan_avtomat;  prebrani_izhod = prebrani_izh }
 
@@ -92,7 +94,7 @@ let main_init () =
       ZamenjajVmesnik SeznamMoznosti
   
 let update model = function
-  | PreberiNiz str ->
+  | PreberiNiz str -> 
       let nov_model = preberi_niz model str in
       { nov_model with stanje_vmesnika = RezultatPrebranegaNiza }
   | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
