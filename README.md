@@ -38,5 +38,12 @@ V tem primeru je vhodna abeceda sestavljena le iz znakov $0$ in $1$: $\Sigma = \
 
   
 ## Primerjava Moorovega in Mealyjevega avtomata
-Tako Moorovi kot Mealyjevi avtomati so primeri končnih avtomatov. Mealyjevi se  od Moorovih razlikujejo po tem, da je rezultat tranzicijske funkcije pri prvih odvisen od trenutnega stanja in trenutnih vhodnih podatkov, medtem ko je pri drugih odvisen le od trenutnega stanja. Pri Moorovih avtomatih je torej vsako stanje označeno z izhodno vrednostjo, medtem ko je pri Mealyjevih avtomatih vsak prehod med stanji označen z izhodno vrednostjo.
-(Vir: https://en.wikipedia.org/wiki/Moore_machine)
+Tako Moorovi kot Mealyjevi avtomati so primeri končnih avtomatov. Mealyjevi se od Moorovih razlikujejo po tem, da je rezultat prehodne funkcije pri prvih odvisen od trenutnega stanja in trenutnih vhodnih podatkov, medtem ko je pri drugih odvisen le od trenutnega stanja. Pri Moorovih avtomatih je torej vsako stanje označeno z izhodno vrednostjo, medtem ko je pri Mealyjevih avtomatih vsak prehod med stanji označen z izhodno vrednostjo.
+(Vir: https://en.wikipedia.org/wiki/Moore_machine , dostopano 16.8.2024)
+
+# Implementacija Mealyjevega avtomata 
+## Kako se moj model razlikuje od profesorjevega
+Za implementacijo mojega modela sem si pomagal s profesorjevim zgledom, ki je dostopen na https://github.com/matijapretnar/programiranje-1/tree/master/projekt. Moja implementacijaje v grobem nadgradnja profesorjeve v dveh točkah:
+- implementira Mealyjev avtomat: dodan je bil tip za zapis izhoda in prilagojene vse funkcije,
+- uporabnik lahko v tekstovnem vmesniku vnese poljuben Mealyjev avtomat in tako obdela poljuben niz.
+
