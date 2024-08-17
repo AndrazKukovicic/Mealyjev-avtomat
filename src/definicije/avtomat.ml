@@ -29,8 +29,6 @@ let prehodna_funkcija avtomat stanje znak =
   | Some (_, _, stanje2, izhod) ->(stanje2, izhod)
 
 let zacetno_stanje avtomat = avtomat.zacetno_stanje
-let seznam_stanj avtomat = avtomat.stanja
-let seznam_prehodov avtomat = avtomat.prehodi
 
 let ustvari_avtomat zacetno_stanje stanja prehodi =
   let pr_avtomat = prazen_avtomat zacetno_stanje in

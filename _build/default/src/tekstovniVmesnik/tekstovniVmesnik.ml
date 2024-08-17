@@ -38,6 +38,7 @@ let init avtomat =
   let prebrani_izh = zagnan_avtomat.trak.izhod in
   { model with stanje_avtomata = zagnan_avtomat;  prebrani_izhod = prebrani_izh }
 
+(*Funkcija izpisi_moznosti od uporabnika prejme zahtevo ali prebere niz ali bo sestavil nov avtomat.*)
 let rec izpisi_moznosti () =
   print_endline "1) Vnesi in preberi niz.";
   print_endline "2) Sestavi nov Mealyjev avtomat.";
@@ -53,6 +54,7 @@ let rec izpisi_moznosti () =
 let izpisi_rezultat model =
   print_endline ("Izhod: " ^ model.prebrani_izhod)
 
+  (*Funkcija main_init od uporabnika prejme parametre za sestavo novega avtomata in ga ustvari.*)
 let main_init () =
   print_string "Vnesi začetno stanje: ";
   let zacetno_stanje = read_line () |> Stanje.iz_niza in
@@ -81,6 +83,8 @@ let main_init () =
   let prehodi = preberi_prehode [] in
 
   Avtomat.ustvari_avtomat zacetno_stanje stanja prehodi
+
+  (*Funkcija view skrbi za prikaz možnosti v uporabniškem vmesniku glede na trenutno stanje vmesnika.*)
  let view model =
   match model.stanje_vmesnika with
   | SeznamMoznosti ->
@@ -93,6 +97,8 @@ let main_init () =
       izpisi_rezultat model;
       ZamenjajVmesnik SeznamMoznosti
   
+(*Funkcija update izvršuje nekajtere zahteve, ki jih je uporabnik vnesel v funkciji view 
+in posodablja stanje vmesnika. *)
 let update model = function
   | PreberiNiz str -> 
       let nov_model = preberi_niz model str in
@@ -101,14 +107,17 @@ let update model = function
   | SestaviNovMealyjevAvtomat -> let nov_avtomat = main_init () in
   init nov_avtomat
 
+(*Funkcija loop v zanki poganja model avtomata, torej funkciji view in update.*)
 let rec loop model =
   let msg = view model in
   let model' = update model msg in
   loop model'
 
+(*Funkcija main na začetku požene tekstovni vmesnik.*)
 let main () =
   let avtomat = main_init () in
   let model = init avtomat in
   loop model 
 
+(*Ob zagonu požene funkcijo main.*)
 let () = main ()
