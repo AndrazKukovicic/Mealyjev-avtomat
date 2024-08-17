@@ -26,8 +26,8 @@ V tem primeru je vhodna abeceda sestavljena le iz znakov $0$ in $1$: $\Sigma =$ 
    
    (Vir: https://www.geeksforgeeks.org/mealy-machine-for-1s-complement/, dostopano 16.8.2024)
 
-**II. Drugi avtomat** je malo zapletenejši a popolnoma obvladljiv. V nizu iz $0$ in $1$ bo preveril ali se pojavita niza $101$ in $110$. V tem primeru bomo potrebovali štiri stanja, ki jih označimo z $q_0, q_1, q_2, q_3$ torej je množica vseh stanj: $S = {q_0, q_1, q_2, q_3}$. Vhodna abeceda je enaka kot pri prejšnjem primeru: $\Sigma =$ {0, 1}. Sestavili bomo avtomat, ki bo v primeru pojavitve $101$ vrnil $A$, če se pojavi $110$ vrnil $B$, kadar pa bo znak končni znak nekega drugega niza bo vrnil $C$.
-- Za začetno stanje bomo izbrali $q_0$. Prehodno in izhodno funkcijo bomo predstavili nekoliko pregledneje kot v prvem primeru predstavili kot seznam četveric oblike (vhodno stanje, vhodni znak, izhodno stanje, izhodni znak):
+**II. Drugi avtomat** je malo zapletenejši a popolnoma obvladljiv. V nizu iz $0$ in $1$ bo preveril ali se pojavita niza $101$ in $110$. V tem primeru bomo potrebovali štiri stanja, ki jih označimo s $q_0, q_1, q_2, q_3$ torej je množica vseh stanj: $S = {q_0, q_1, q_2, q_3}$. Vhodna abeceda je enaka kot pri prejšnjem primeru: $\Sigma =$ {0, 1}. Sestavili bomo avtomat, ki bo v primeru pojavitve $101$ vrnil $A$, če se pojavi $110$ vrnil $B$, kadar pa bo znak končni znak nekega drugega niza bo vrnil $C$.
+- Za začetno stanje bomo izbrali $q_0$. Prehodno in izhodno funkcijo bomo predstavili nekoliko pregledneje kot v prvem primeru in sicer kot seznam četveric oblike (vhodno stanje, vhodni znak, izhodno stanje, izhodni znak):
    - $(q_0, 0, q_0, C)$
    - $(q_0, 1, q_1, C)$
    - $(q_1, 0, q_2, C)$
@@ -103,5 +103,5 @@ Datoteke, ki so vsebinsko pomembne za implementacijo avtomata se nahajajo v mapi
   - Druga vsebuje definicije traku in nekaj funkcij za delo s trakom, npr. premik traka za eno mesto naprej, vnos niza v trak in podobno.
   - Tretja vsebuje definicijo tipa `Stanje`.
   - Četrta pa funkciji pomembni za poganjanje avtomata ob vsakem premiku niza.
-- V drugi pa je zgolj datoteka `tekstovniVmesnik`, ki vsebuje funkcije, ki med sabo povežejo datoteke iz mape `definicije`, izpisujejo za uporabnika prijazne zapise in obdelujejo uporabnikove vnose. 
+- V drugi mapi pa je zgolj datoteka `tekstovniVmesnik`, ki vsebuje funkcije, ki med sabo povežejo datoteke iz mape `definicije`, izpisujejo za uporabnika prijazne zapise in obdelujejo uporabnikove vnose. 
 
