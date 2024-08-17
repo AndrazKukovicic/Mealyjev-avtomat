@@ -103,5 +103,5 @@ Datoteke, ki so vsebinsko pomembne za implementacijo avtomata se nahajajo v mapi
   - Druga vsebuje definicije traku in nekaj funkcij za delo s trakom, npr. premik traka za eno mesto naprej, vnos niza v trak in podobno.
   - Tretja vsebuje definicijo tipa `Stanje`.
   - Četrta pa funkciji pomembni za poganjanje avtomata ob vsakem premiku niza.
-- V drugi pa je zgolj datoteka `tekstovniVmesnik`, ki vsebuje funkcije, ki med sabo povežejo datoteke iz mape `definicije`, izpisujejo za uporabnika prijazne zapise in obdelujejo uporabnikove vnose. 
+- V drugi mapi pa je zgolj datoteka `tekstovniVmesnik`, ki vsebuje funkcije, ki med sabo povežejo datoteke iz mape `definicije`, izpisujejo za uporabnika prijazne zapise in obdelujejo uporabnikove vnose. 
 
