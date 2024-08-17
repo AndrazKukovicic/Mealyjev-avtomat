@@ -99,9 +99,9 @@ Ob splošnih navodilih za uporabo so zapisana tudi navodila za implementacijo na
 ## Struktura datotek
 Datoteke, ki so vsebinsko pomembne za implementacijo avtomata se nahajajo v mapi `src`. V njej sta mapi `definicije` in `tekstovniVmesnik`.
 - V prvi so štiri datoteke `avtomat.ml`, `trak.ml`, `stanje.ml` in `zagnaniAvtomat.ml`.
-  - Prva vsebuje definicijo tipa avtomat in funkcije za ustvarjanje novega avtomata in funkcijo `prehodna_funkcija`, ki za posamezno vhodno stanje in znak vrne izhodno stanje in izhodni znak.
-  - Druga vsebuje definicije traku in nekaj funkcij za delo s trakom, npr. premik traka za eno mesto naprej, vnos niza v trak in podobno.
+  - Prva vsebuje definicijo tipa `Avtomat`, ki je sestavljen iz seznama stanj, začetnega stanja in seznama četveric, ki predstavljajo prehode. Vsebuje tudi funkcije za ustvarjanje novega avtomata in funkcijo `prehodna_funkcija`, ki za posamezno vhodno stanje in znak vrne izhodno stanje in izhodni znak.
+  - Druga vsebuje definicije tipa `Trak`, ki je sestavljen iz niza (tipa String), indeksa trenutnega znaka in izhoda, ki je tudi tipa String. Vsebuje nekaj funkcij za delo s trakom, npr. premik traka za eno mesto naprej, vnos niza v trak in podobno.
   - Tretja vsebuje definicijo tipa `Stanje`.
-  - Četrta pa funkciji pomembni za poganjanje avtomata ob vsakem premiku niza.
-- V drugi mapi pa je zgolj datoteka `tekstovniVmesnik`, ki vsebuje funkcije, ki med sabo povežejo datoteke iz mape `definicije`, izpisujejo za uporabnika prijazne zapise in obdelujejo uporabnikove vnose. 
+  - Četrta pa funkciji pomembni za poganjanje avtomata ob vsakem premiku niza. V njej je definiran tip `t`, ki je sestavljen iz avtomata, ki je tip `Avtomat.t`, traku, ki je tipa `Trak.t`in stanja, ki je seveda tipa `Stanje.t`.
+- V drugi mapi pa je zgolj datoteka `tekstovniVmesnik`, ki vsebuje funkcije, ki med sabo povežejo datoteke iz mape `definicije`, izpisujejo za uporabnika prijazne zapise in obdelujejo uporabnikove vnose. Poleg tipov, ki so podobni tistim s profesorjevega primera vsebuje še tip `model`, ki je sestavljen iz stanja avtomata, ki je tipa `ZagnaniAvtomat`, stanja vmesnika, ki vsebuje tip `stanje_vmesnika` in prebranega izhoda, kamor se shrani niz, ki predstavlja izhod avtomata.
 
